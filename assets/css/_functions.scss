@@ -1,9 +1,14 @@
 
 // Color variables
-$blue: #486ea6;
-$violet: #6948a6;
+$blue: #276296;
+$violet: #332e58;
 $red: #e75757;
 $green: #81c64a;
+$white: #ffffff;
+$black: #000000;
+$gray: #d5d5d5;
+$light-gray: #eaeaea;
+$soft-gray: #f4f4f4;
 
 // Mediaquery variables
 $small: "screen and (min-width: 576px)";
@@ -12,3 +17,4 @@ $large: "screen and (min-width: 992px)";
 $extra-large: "screen and (min-width: 1200px)";
 
 // Font-Family variables
+$font-sans: Helvetica, Arial, sans-serif;
