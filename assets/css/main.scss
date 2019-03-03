@@ -197,7 +197,7 @@ $height-row: 3.6em;
     }
   }
 }
- 
+
 .main__wrapper {
   grid-area: main;
   height: 100%;
@@ -213,17 +213,32 @@ $height-row: 3.6em;
     padding: 1em;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 21em);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 27em); 
     grid-template-areas: 
     "BOX1 BOX2 BOX3"
     "BOX4 BOX5 BOX6"
     "BOX7 BOX8 BOX9";
     grid-gap: 1em;
     @extend %border-radius;
+    @media#{$extra-large}{
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 21em);
+    }
+    @media all and (-ms-high-contrast:none) {
+      & {
+        margin-right: 1em;
+        grid-template-columns: 1fr 1em 1fr;
+        grid-template-rows: 21em 1em 21em 1em 21em 1em 21em;
+        @media#{$extra-large}{
+          grid-template-columns: 1fr 1em 1fr 1em 1fr;
+          grid-template-rows: 21em 1em 21em 1em 21em;
+        }
+      }
+    }
   }
   .aside-content__wrapper {
-    grid-area: aside;
+    grid-area: aside; 
     height: 100%;
     background-color: $white;
     @extend %border-radius;
@@ -240,6 +255,30 @@ $height-row: 3.6em;
     &:nth-child(#{$i}){
       grid-area: BOX#{$i};
     }
+  }
+  @media all and (-ms-high-contrast:none) {
+    
+    &:nth-child(1){
+      -ms-grid-row: 1;
+      -ms-grid-column: 1;
+    }
+    &:nth-child(2){
+      -ms-grid-row: 1;
+      -ms-grid-column: 3;
+    }
+    &:nth-child(3){
+      -ms-grid-row: 1;
+      -ms-grid-column: 5;
+    }
+    &:nth-child(4){
+      -ms-grid-row: 3;
+      -ms-grid-column: 1;
+    }
+    &:nth-child(5){
+      -ms-grid-row: 3;
+      -ms-grid-column: 3;
+    }
+    
   }
   .box__header {
     height: 40%;
@@ -261,14 +300,10 @@ $height-row: 3.6em;
     }
   }
   .box__content { 
-    height: 60%; 
     padding: 1.5em 3em;
     box-sizing: border-box;
   }
   .box__tag {
-    position: absolute;
-    bottom: 2em;
-    left: 0;
     width: 8em;
     height: 2em;
     color: $white;
@@ -277,6 +312,9 @@ $height-row: 3.6em;
     justify-content: center;
     text-transform: uppercase;
     border-radius: 0 25px 25px 0;
+    position: absolute;
+    bottom: 2em;
+    left: 0;
     &--red {
       background-color: $red;
     }
