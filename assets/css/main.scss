@@ -16,6 +16,7 @@ html, body {
 a {
   color: $white;
   text-decoration: none;
+  cursor: pointer;
 }
 
 figure {
@@ -28,19 +29,103 @@ img {
   display: block;
 }
 
+$width-colum: 5em;
+$height-row: 3.6em;
+
 .page__wrapper {
   display: grid;
-  grid-template-columns: 5em 1fr;
-  grid-template-rows: 3em 1fr;
+  grid-template-columns: $width-colum 1fr;
+  grid-template-rows: $height-row 1fr;
   grid-template-areas:
   "menu search"
   "menu main";
+  height: 100%;
 } 
 
 .header__wrapper {
   grid-area: search;
   background-color: $light-gray; 
   width: 100%;
+  .header__container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: .5em 1em;
+    box-sizing: border-box;
+  }
+  .section__side {
+    &--left {
+      width: 85%;
+      height: 100%;
+      background-color: $white;
+      @extend %border-radius;
+      overflow: hidden;
+    }
+    &--right {
+      width: 15%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      .square__section, .circle__section {
+        display: flex;
+        justify-content: space-around;
+        height: 100%;
+        align-items: center;
+      }
+      .square__section {
+        width: 60%;
+        padding: 0 1em;
+        border-right: 1px solid rgba($black, .2);
+      }
+      .circle__section {
+        width: 40%;
+      }
+    }
+  }
+}
+
+.search__wrapper {
+  height: 100%;
+  .search__container {
+    height: 100%;
+    display: flex;
+    .search__button {
+      height: 100%;
+      border: none;
+      background-color: $violet;
+      width: 3em;
+      padding: 0.5em;
+      box-sizing: border-box;
+      @extend %border-radius;
+      color: $white;
+    }
+    .search__input {
+      width: 100%;
+      border: none;
+      padding: 0.5em 1em;
+    }
+  }
+}
+
+.item__square {
+  height: 2em;
+  width: 2em;
+  @extend %border-radius;
+  &--blue {
+    background-color: $blue;
+  }
+  &--violet {
+    background-color: $violet;
+  }
+}
+
+.item__circle {
+  height: 2em;
+  width: 2em;
+  border-radius: 100%;
+  &--white {
+    background-color: $white;
+  }
 }
 
 .menu__wrapper {
@@ -49,6 +134,11 @@ img {
   background-color: $blue;
   background: filter-gradient($blue, $violet, vertical);
   background-image: (linear-gradient(to top, $blue 0%, $violet 70%));
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: $width-colum;
+  z-index: 10;
   .menu__container {
     display: flex;
     flex-wrap: wrap;
@@ -68,7 +158,6 @@ img {
       display: flex;
       justify-content: center;
       text-align: center;
-      padding: 1em;
       box-sizing: border-box;
       text-transform: uppercase;
       width: 100%;
@@ -90,6 +179,7 @@ img {
         top: 0;
         left: 0;
         opacity: 0;
+        pointer-events: none;
       }
       &:hover::before:not(.js-open) {
         opacity: 1;
@@ -100,6 +190,10 @@ img {
         background: filter-gradient($violet, $blue, horizontal);
         background-image: (linear-gradient(to left top, $violet 30%, $blue 100%));
       }
+    }
+    .menu-item__container {
+      padding: 1em;
+      box-sizing: border-box;
     }
   }
 }
@@ -112,18 +206,27 @@ img {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-column-gap: 1em;
+  grid-template-areas: "box aside"; 
   .main__container {
+    grid-area: box;
     background-color: $white;
     padding: 1em;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 21em);
+    grid-template-areas: 
+    "BOX1 BOX2 BOX3"
+    "BOX4 BOX5 BOX6"
+    "BOX7 BOX8 BOX9";
     grid-gap: 1em;
+    @extend %border-radius;
   }
   .aside-content__wrapper {
+    grid-area: aside;
     height: 100%;
     background-color: $white;
+    @extend %border-radius;
   } 
 }
 
@@ -132,24 +235,53 @@ img {
   height: 100%;
   background-color: $soft-gray;
   position: relative;
+  @extend %border-radius;
+  @for $i from 1 through 9 {
+    &:nth-child(#{$i}){
+      grid-area: BOX#{$i};
+    }
+  }
   .box__header {
     height: 40%;
     background-color: $light-gray;
+    padding: 1.5em 3em;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
     .box-img__container {
       background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;
       height: 100%;
-      width: 100%;
+      width: 100%; 
+      position: absolute;
+      left: 0;
+      top: 0;
     }
   }
-  .box__content {
-    height: 60%;
-    padding: 1.5em 2em;
+  .box__content { 
+    height: 60%; 
+    padding: 1.5em 3em;
+    box-sizing: border-box;
   }
   .box__tag {
     position: absolute;
     bottom: 2em;
     left: 0;
+    width: 8em;
+    height: 2em;
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    border-radius: 0 25px 25px 0;
+    &--red {
+      background-color: $red;
+    }
+    &--green {
+      background-color: $green;
+    }
   }
 }
