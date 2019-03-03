@@ -18,3 +18,8 @@ $extra-large: "screen and (min-width: 1200px)";
 
 // Font-Family variables
 $font-sans: Helvetica, Arial, sans-serif;
+
+// Constant CSS
+%border-radius {
+  border-radius: 6px;
+}
