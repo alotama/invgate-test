@@ -130,13 +130,14 @@ $height-row: 3.6em;
 
 .menu__wrapper {
   grid-area: menu;
-  height: 100vh;
+  height: 100%;
   background-color: $blue;
   background: filter-gradient($blue, $violet, vertical);
   background-image: (linear-gradient(to top, $blue 0%, $violet 70%));
   position: fixed;
-  left: 0;
+  left: 0; 
   top: 0;
+  bottom: 0;
   width: $width-colum;
   z-index: 10;
   .menu__container {
@@ -204,7 +205,7 @@ $height-row: 3.6em;
   padding: 1em;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: minmax(580px, 2fr) minmax(300px, 1fr); 
   grid-column-gap: 1em;
   grid-template-areas: "box aside"; 
   .main__container {
@@ -213,28 +214,34 @@ $height-row: 3.6em;
     padding: 1em;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
     grid-template-rows: repeat(4, 27em); 
     grid-template-areas: 
-    "BOX1 BOX2 BOX3"
-    "BOX4 BOX5 BOX6"
-    "BOX7 BOX8 BOX9";
+    "BOX1 BOX2"
+    "BOX3 BOX4"
+    "BOX5 BOX6"
+    "BOX7 BOX8"
+    "BOX9 ." ;
     grid-gap: 1em;
     @extend %border-radius;
     @media#{$extra-large}{
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 21em);
+      grid-template-columns: repeat(3, minmax(30%, 1fr));
+      grid-template-rows: repeat(3, 24em);
+      grid-template-areas: 
+      "BOX1 BOX2 BOX3"
+      "BOX4 BOX5 BOX6"
+      "BOX7 BOX8 BOX9";
     }
     @media all and (-ms-high-contrast:none) {
       & {
         margin-right: 1em;
-        grid-template-columns: 1fr 1em 1fr;
-        grid-template-rows: 21em 1em 21em 1em 21em 1em 21em;
-        @media#{$extra-large}{
-          grid-template-columns: 1fr 1em 1fr 1em 1fr;
-          grid-template-rows: 21em 1em 21em 1em 21em;
-        }
+        grid-template-columns: minmax(240px, 1fr) 1em minmax(240px, 1fr);
+        grid-template-rows: 27em 1em 27em 1em 27em;
       }
+    }
+    @media#{$extra-large} and (-ms-high-contrast:none){
+      grid-template-columns: 1fr 1em 1fr 1em 1fr;
+      grid-template-rows: 21em 1em 21em 1em 21em;
     }
   }
   .aside-content__wrapper {
